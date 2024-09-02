@@ -70,7 +70,16 @@ def vista_admin():
     admin_window.title("COMERCIALIZADORA GREMLINS")
     admin_window.resizable(0,0)
     admin_window.config(bd=50)
-    
+    titulo = Label(admin_window, text="COMERCIALIZADORA GREMLINS", fg="black", font=(" ", 17, "bold"),pady=10).pack()
+    marcoAdmin = LabelFrame(admin_window, text="Información de usuario", font=("", 10, "bold"),pady=5, padx=50)
+    marcoAdmin.config(bd=2)
+    marcoAdmin.pack()
+
+    #Formulario información de usuario
+    Label(marcoAdmin, text="Usuario:").pack(pady=5)
+    global lbl_usuario
+    lbl_usuario = Entry(marcoAdmin)
+    lbl_usuario.pack(pady=5)
 
 
     # Crear tabla
