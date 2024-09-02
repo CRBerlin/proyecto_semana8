@@ -31,7 +31,7 @@ def inicio_sesion(usuario,contrasena):
         print(f"Error: {err}")
         return False
     
-# Funciones y vista del usuario administrador
+#***********************************************************Funciones y vista del usuario administrador************************************************************
 def obtener_usuarios():
     conexion = get_db_conexion()
     cursor = conexion.cursor()
@@ -66,8 +66,12 @@ def vista_admin():
     global admin_window
     admin_window = Tk()
     # index_window = Toplevel()
-    admin_window.geometry("800x500")
-    admin_window.title("Vista Administrador")
+    admin_window.geometry("900x600")
+    admin_window.title("COMERCIALIZADORA GREMLINS")
+    admin_window.resizable(0,0)
+    admin_window.config(bd=50)
+    
+
 
     # Crear tabla
     tree = ttk.Treeview(admin_window, columns=("codigo", "tipo_doc", "numero_doc", "nombre", "apellido", "usuario","contrasena", "telefono", "correo", "rol"), show="headings")
@@ -143,20 +147,30 @@ def login():
 def main():
     global login_window
     login_window = Tk()
-    login_window.geometry("800x500")
-    login_window.title("Inicio de Sesión")
+    login_window.geometry("900x600")
+    #Título del aplicativo
+    login_window.title("COMERCIALIZADORA GREMLINS")
+    login_window.resizable(0,0)
+    login_window.config(bd=50)
+    #Creación del título de la ventana titulo
+    titulo = Label(login_window, text="COMERCIALIZADORA GREMLINS", fg="black", font=(" ", 17, "bold"),pady=30).pack()
+    #Creación de un marco
+    marco = LabelFrame(login_window, text="Inicio de sesión", font=("", 10, "bold"),pady=5, padx=50)
+    marco.config(bd=2)
+    marco.pack()
 
-    Label(login_window, text="Usuario:").pack(pady=5)
+    #Formulario usuario y contraseña
+    Label(marco, text="Usuario:").pack(pady=5)
     global lbl_usuario
-    lbl_usuario = Entry(login_window)
+    lbl_usuario = Entry(marco)
     lbl_usuario.pack(pady=5)
 
-    Label(login_window, text="Contraseña:").pack(pady=5)
+    Label(marco, text="Contraseña:").pack(pady=5)
     global lbl_contrasena
-    lbl_contrasena = Entry(login_window, show='*')
+    lbl_contrasena = Entry(marco, show='*')
     lbl_contrasena.pack(pady=5)
 
-    Button(login_window, text="Iniciar sesión", command=login).pack(pady=20)
+    Button(marco, text="Iniciar sesión", command=login).pack(pady=20)
 
     login_window.mainloop()
 
