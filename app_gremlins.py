@@ -76,10 +76,78 @@ def vista_admin():
     marcoAdmin.pack()
 
     #Formulario información de usuario
-    Label(marcoAdmin, text="Usuario:").pack(pady=5)
-    global lbl_usuario
-    lbl_usuario = Entry(marcoAdmin)
-    lbl_usuario.pack(pady=5)
+    #Tipo Documento
+    Label(marcoAdmin, text="Tipo documento:", font=(" ",10,"bold")).grid(row=0,column=0,sticky="s",padx=5,pady=8)
+    global lbl_tipo_doc
+    lbl_tipo_doc = Entry(marcoAdmin, width=25)
+    lbl_tipo_doc.grid(row=0,column=1,padx=5,pady=8)
+
+    #Número del Documento
+    Label(marcoAdmin, text="Número del documento:", font=(" ",10,"bold")).grid(row=1,column=0,sticky="s",padx=5,pady=8)
+    global lbl_numero_doc
+    lbl_numero_doc = Entry(marcoAdmin, width=25)
+    lbl_numero_doc.focus()
+    lbl_numero_doc.grid(row=1,column=1,padx=5,pady=8)
+
+    #Nombre del Usuario
+    Label(marcoAdmin, text="Nombre:", font=(" ",10,"bold")).grid(row=2,column=0,sticky="s",padx=5,pady=8)
+    global lbl_nombre
+    lbl_nombre = Entry(marcoAdmin, width=25)
+    lbl_nombre.grid(row=2,column=1,padx=5,pady=8)
+
+    #Apellido del Usuario
+    Label(marcoAdmin, text="Apellido:", font=(" ",10,"bold")).grid(row=3,column=0,sticky="s",padx=5,pady=8)
+    global lbl_apellido
+    lbl_apellido = Entry(marcoAdmin, width=25)
+    lbl_apellido.grid(row=3,column=1,padx=5,pady=8)
+
+    #Teléfono del Usuario
+    Label(marcoAdmin, text="Teléfono:", font=(" ",10,"bold")).grid(row=4,column=0,sticky="s",padx=5,pady=8)
+    global lbl_telefono
+    lbl_telefono = Entry(marcoAdmin, width=25)
+    lbl_telefono.grid(row=4,column=1,padx=5,pady=8)
+
+    #Usuario del Usuario
+    Label(marcoAdmin, text="Usuario:", font=(" ",10,"bold")).grid(row=0,column=2,sticky="s",padx=5,pady=8)
+    global lbl_usuario_info
+    lbl_usuario_info = Entry(marcoAdmin, width=25)
+    lbl_usuario_info.grid(row=0,column=3,padx=5,pady=8)
+
+    #Contraseña del Usuario
+    Label(marcoAdmin, text="Contrasena:", font=(" ",10,"bold")).grid(row=1,column=2,sticky="s",padx=5,pady=8)
+    global lbl_contrasena_info
+    lbl_contrasena_info = Entry(marcoAdmin, width=25)
+    lbl_contrasena_info.grid(row=1,column=3,padx=5,pady=8)
+
+    #Correo del Usuario
+    Label(marcoAdmin, text="Email:", font=(" ",10,"bold")).grid(row=2,column=2,sticky="s",padx=5,pady=8)
+    global lbl_email
+    lbl_email = Entry(marcoAdmin, width=25)
+    lbl_email.grid(row=2,column=3,padx=5,pady=8)
+
+    #Rol del Usuario
+    Label(marcoAdmin, text="Rol:", font=(" ",10,"bold")).grid(row=3,column=2,sticky="s",padx=5,pady=9)
+    global lbl_rol
+    lbl_rol = ttk.Combobox(marcoAdmin, values=["Administrador", "Empacador","Transportador", "Recepcionista"], width=22)
+    lbl_rol.current(0)
+    lbl_rol.grid(row=3,column=3,padx=5,pady=8)
+
+    #Botones
+    #Crear botones
+    btn_frame = Frame(admin_window)
+    btn_frame.pack()
+    # btn_frame.grid(row=2,column=0,padx=5,pady=5)
+
+    
+    btn_agregar = Button(btn_frame, text="Agregar",command=lambda: editar_usuario(seleccionar_usuario(tree)),height=2,width=12,bg="green",fg="white",font=(" ", 10,"bold"))
+    btn_agregar.grid(row=0,column=0,padx=10,pady=5)
+
+    btn_editar = Button(btn_frame, text="Editar", command=lambda: editar_usuario(seleccionar_usuario(tree)),height=2,width=12,bg="yellow",fg="black",font=(" ", 10,"bold"))
+    btn_editar.grid(row=0, column=1,padx=10,pady=5)
+
+    btn_eliminar = Button(btn_frame, text="Eliminar", command=lambda: eliminar_usuario(seleccionar_usuario(tree)),height=2,width=12,bg="red",fg="white",font=(" ", 10,"bold"))
+    btn_eliminar.grid(row=0, column=2,padx=10,pady=5)
+
 
 
     # Crear tabla
@@ -113,16 +181,6 @@ def vista_admin():
     for usuario in usuarios:
         tree.insert("", "end", values=usuario)
     
-    # Crear botones
-    btn_frame = Frame(admin_window)
-    btn_frame.pack(fill=X)
-
-    btn_editar = Button(admin_window, text="Editar", command=lambda: editar_usuario(seleccionar_usuario(tree)))
-    btn_editar.pack(side=LEFT, padx=10, pady=5, fill=X, expand=True)
-
-    btn_eliminar = Button(admin_window, text="Eliminar", command=lambda: eliminar_usuario(seleccionar_usuario(tree)))
-    btn_eliminar.pack(side=RIGHT, padx=10, pady=5, fill=X, expand=True)
-    
     admin_window.mainloop()
 
 def login():
@@ -136,15 +194,15 @@ def login():
         rol = arreglo[9]
         print(f"Rol de usuario:{rol}")
         login_window.destroy()
-        if rol == "admin":
+        if rol == "Administrador":
             vista_admin()
-        elif rol == "empacador":
+        elif rol == "Empacador":
             # vista_empacador()
             vista_admin()
-        elif rol == "transportador":
+        elif rol == "Transportador":
             # vista_transportador()
             vista_admin()       
-        elif rol == "recepcionista":
+        elif rol == "Recepcionista":
             # vista_recepcionista()
             vista_admin()
         else:
